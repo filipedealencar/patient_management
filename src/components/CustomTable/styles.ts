@@ -1,13 +1,6 @@
 import { styled } from "styled-components";
 
 export const TableWrapper = styled.div`
-  font-family: Arial, sans-serif;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  height: 450px;
-  overflow: auto;
-  border-radius: 15px;
-
   &::-webkit-scrollbar {
     width: 5px;
     height: 5px;
@@ -25,44 +18,56 @@ export const TableWrapper = styled.div`
   }
 `;
 
+export const ContainerTable = styled.div`
+  font-family: Arial, sans-serif;
+  height: 450px;
+  overflow: auto;
+`;
+
 export const TableStyle = styled.table`
   width: 100%;
-  border-collapse: collapse;
+  border-spacing: 0px 15px;
+  padding: 0px 5px;
 `;
 
 export const TheadStyle = styled.thead`
   position: sticky;
   top: 0;
   z-index: 999;
+  height: 55px;
 `;
-export const TRStyle = styled.tr<{ position: number }>`
-  background: ${({ position }) =>
-    position === 0
-      ? "#FBBA22"
-      : position === 1
-      ? "#C0C0C0"
-      : position === 2
-      ? "#CD7F32"
-      : "#1b8cff"};
-`;
+export const TRStyle = styled.tr``;
 export const THStyle = styled.th`
   padding: 10px;
-  background-color: #f2f2f2;
-`;
-export const TDStyle = styled.td<{ isTheFirst: boolean }>`
-  color: #fff;
-  border-top: 1px solid #ccc;
-  font-size: 1rem;
-  font-weight: 700;
-  filter: drop-shadow(0px 0px 2px black);
+  background-color: #bcd2ff;
+  color: #001240;
+  text-transform: capitalize;
 
   &:first-child {
     /* color: #fff; */
-    border-left: 1px solid #ccc;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
   }
 
   &:last-child {
-    border-right: 1px solid #ccc;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+`;
+export const TDStyle = styled.td`
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  height: 80px;
+
+  &:first-child {
+    /* color: #fff; */
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  &:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
   }
 `;
 export const TbodyStyle = styled.tbody`

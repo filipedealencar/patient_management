@@ -1,0 +1,3 @@
+interface PropsBadgeText {
+  name: string;
+}

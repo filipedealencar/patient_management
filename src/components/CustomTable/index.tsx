@@ -8,6 +8,7 @@ import {
   TbodyStyle,
   TDStyle,
   TableWrapper,
+  ContainerTable,
 } from "./styles";
 
 const CustomTable: React.FC<ICustomTable> = ({ data }) => {
@@ -31,43 +32,40 @@ const CustomTable: React.FC<ICustomTable> = ({ data }) => {
 
   return (
     <TableWrapper>
-      <TableStyle {...getTableProps()}>
-        <TheadStyle>
-          {headerGroups.map((headerGroup, index) => (
-            <TRStyle
-              position={index}
-              {...headerGroup.getHeaderGroupProps()}
-              key={headerGroup.id}
-            >
-              {headerGroup.headers.map((column) => (
-                <THStyle {...column.getHeaderProps()} key={column.id}>
-                  {column.render("Header")}
-                </THStyle>
-              ))}
-            </TRStyle>
-          ))}
-        </TheadStyle>
-        <TbodyStyle {...getTableBodyProps()}>
-          {rows.map((row, index) => {
-            prepareRow(row);
-            return (
-              <TRStyle position={index} {...row.getRowProps()} key={row.id}>
-                {row.cells.map((cell) => {
-                  return (
-                    <TDStyle
-                      {...cell.getCellProps()}
-                      isTheFirst={index === 0}
-                      key={cell.column.id}
-                    >
-                      {cell.render("Cell")}
-                    </TDStyle>
-                  );
-                })}
+      <ContainerTable>
+        <TableStyle {...getTableProps()}>
+          <TheadStyle>
+            {headerGroups.map((headerGroup, index) => (
+              <TRStyle
+                {...headerGroup.getHeaderGroupProps()}
+                key={headerGroup.id}
+              >
+                {headerGroup.headers.map((column) => (
+                  <THStyle {...column.getHeaderProps()} key={column.id}>
+                    {column.render("Header")}
+                  </THStyle>
+                ))}
               </TRStyle>
-            );
-          })}
-        </TbodyStyle>
-      </TableStyle>
+            ))}
+          </TheadStyle>
+          <TbodyStyle {...getTableBodyProps()}>
+            {rows.map((row, index) => {
+              prepareRow(row);
+              return (
+                <TRStyle {...row.getRowProps()} key={row.id}>
+                  {row.cells.map((cell) => {
+                    return (
+                      <TDStyle {...cell.getCellProps()} key={cell.column.id}>
+                        {cell.render("Cell")}
+                      </TDStyle>
+                    );
+                  })}
+                </TRStyle>
+              );
+            })}
+          </TbodyStyle>
+        </TableStyle>
+      </ContainerTable>
     </TableWrapper>
   );
 };

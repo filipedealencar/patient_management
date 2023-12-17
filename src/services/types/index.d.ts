@@ -1,0 +1,26 @@
+export type Patient = {
+  id: number;
+  name: string;
+  age: number;
+  cpf: string;
+  rg: string;
+  dateOfBirth: string;
+  gender: string;
+  motherName: string;
+  fatherName: string;
+  email: string;
+  zipCode: string;
+  address: string;
+  number: number;
+  neighborhood: string;
+  city: string;
+  state: string;
+  landline: string;
+  cellphone: string;
+  height: string;
+  weight: number;
+  bloodType: string;
+  eyeColor: string;
+  provider: string;
+  medicalConditions: string[];
+};
