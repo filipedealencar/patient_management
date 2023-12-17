@@ -6,7 +6,7 @@ import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 import { NextPage } from "next";
 import "@/styles/fonts.css";
 import { GlobalContextProvider } from "@/contexts/GlobalContext";
-import SidebarWithHeader from "@/layouts/Sidebar";
+import SidebarWithHeader from "@/layouts/SidebarWithHeader";
 
 export type NextPageWithLayout<P = unknown, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
