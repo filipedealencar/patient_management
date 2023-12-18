@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const HomeWrapper = styled.div`
-  height: 100%;
-  padding: 40px;
+  width: 100%;
+  /* height: 100%; */
+  padding: 20px 40px;
 `;
 
 export const ContainerHeaderHome = styled.div`

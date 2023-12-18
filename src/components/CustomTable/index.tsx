@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 import { useTable } from "react-table";
 import {
   TableStyle,
@@ -11,7 +11,7 @@ import {
   ContainerTable,
 } from "./styles";
 
-const CustomTable: React.FC<ICustomTable> = ({ data }) => {
+const CustomTable: React.FC<ICustomTable> = ({ data, responsive }) => {
   const columns = useMemo(() => {
     if (data.length === 0) {
       return [];
@@ -30,44 +30,122 @@ const CustomTable: React.FC<ICustomTable> = ({ data }) => {
       data,
     });
 
-  return (
-    <TableWrapper>
-      <ContainerTable>
-        <TableStyle {...getTableProps()}>
-          <TheadStyle>
-            {headerGroups.map((headerGroup, index) => (
-              <TRStyle
-                {...headerGroup.getHeaderGroupProps()}
-                key={headerGroup.id}
-              >
-                {headerGroup.headers.map((column) => (
-                  <THStyle {...column.getHeaderProps()} key={column.id}>
-                    {column.render("Header")}
-                  </THStyle>
-                ))}
-              </TRStyle>
-            ))}
-          </TheadStyle>
-          <TbodyStyle {...getTableBodyProps()}>
-            {rows.map((row, index) => {
-              prepareRow(row);
+  const TableResponsive = ({}) => {
+    return (
+      <TableWrapper>
+        <ContainerTable>
+          {React.Children.toArray(
+            data.map((item, i) => {
+              const {
+                getTableProps,
+                getTableBodyProps,
+                headerGroups,
+                rows,
+                prepareRow,
+              } = useTable({ columns, data: [item] });
+
               return (
-                <TRStyle {...row.getRowProps()} key={row.id}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <TDStyle {...cell.getCellProps()} key={cell.column.id}>
-                        {cell.render("Cell")}
-                      </TDStyle>
-                    );
-                  })}
-                </TRStyle>
+                <TableStyle {...getTableProps()}>
+                  <TheadStyle>
+                    {React.Children.toArray(
+                      headerGroups.map((headerGroup, index) => (
+                        <TRStyle
+                          {...headerGroup.getHeaderGroupProps()}
+                          key={headerGroup.id}
+                        >
+                          {React.Children.toArray(
+                            headerGroup.headers.map((column) => (
+                              <THStyle
+                                {...column.getHeaderProps()}
+                                key={column.id}
+                              >
+                                {column.render("Header")}
+                              </THStyle>
+                            ))
+                          )}
+                        </TRStyle>
+                      ))
+                    )}
+                  </TheadStyle>
+                  <TbodyStyle {...getTableBodyProps()}>
+                    {React.Children.toArray(
+                      rows.map((row, index) => {
+                        prepareRow(row);
+                        return (
+                          <TRStyle {...row.getRowProps()} key={row.id}>
+                            {row.cells.map((cell) => {
+                              return (
+                                <TDStyle
+                                  {...cell.getCellProps()}
+                                  key={cell.column.id}
+                                >
+                                  {cell.render("Cell")}
+                                </TDStyle>
+                              );
+                            })}
+                          </TRStyle>
+                        );
+                      })
+                    )}
+                  </TbodyStyle>
+                </TableStyle>
               );
-            })}
-          </TbodyStyle>
-        </TableStyle>
-      </ContainerTable>
-    </TableWrapper>
-  );
+            })
+          )}
+        </ContainerTable>
+      </TableWrapper>
+    );
+  };
+
+  const TableDefault = ({}) => {
+    return (
+      <TableWrapper>
+        <ContainerTable>
+          <TableStyle {...getTableProps()}>
+            <TheadStyle>
+              {React.Children.toArray(
+                headerGroups.map((headerGroup, index) => (
+                  <TRStyle
+                    {...headerGroup.getHeaderGroupProps()}
+                    key={headerGroup.id}
+                  >
+                    {headerGroup.headers.map((column) => (
+                      <THStyle {...column.getHeaderProps()} key={column.id}>
+                        {column.render("Header")}
+                      </THStyle>
+                    ))}
+                  </TRStyle>
+                ))
+              )}
+            </TheadStyle>
+            <TbodyStyle {...getTableBodyProps()}>
+              {React.Children.toArray(
+                rows.map((row, index) => {
+                  prepareRow(row);
+                  return (
+                    <TRStyle {...row.getRowProps()} key={row.id}>
+                      {row.cells.map((cell) => {
+                        return (
+                          <TDStyle
+                            {...cell.getCellProps()}
+                            key={cell.column.id}
+                          >
+                            {cell.render("Cell")}
+                          </TDStyle>
+                        );
+                      })}
+                    </TRStyle>
+                  );
+                })
+              )}
+            </TbodyStyle>
+          </TableStyle>
+        </ContainerTable>
+      </TableWrapper>
+    );
+  };
+
+  return responsive ? <TableResponsive /> : <TableDefault />;
 };
 
 export default CustomTable;

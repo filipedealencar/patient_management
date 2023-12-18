@@ -1,7 +1,14 @@
-import { CSSProp, Interpolation } from "styled-components";
+import { CSSProp, Interpolation, RuleSet } from "styled-components";
 
 export interface ThemeInterface {
-  media: { min: MediaFunction; max: MediaFunction };
+  media: {
+    min: MediaFunction;
+    max: MediaFunction;
+    orientation: {
+      landscape: MediaFunctionOrientation;
+      portrait: MediaFunctionOrientation;
+    };
+  };
   mediaValues: breakpointValues;
   typography: typographyValues;
 }
@@ -103,6 +110,9 @@ interface typographyValues {
 export type MediaFunction = {
   [key in breakpointsSizes]: (...args: Interpolation<object>[]) => CSSProp;
 };
+export type MediaFunctionOrientation = (
+  ...args: Interpolation<object>[]
+) => RuleSet<object>;
 
 export interface breakpointValues {
   mobileXS: number;

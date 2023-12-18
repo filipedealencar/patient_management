@@ -1,1 +1,4 @@
-interface IHeader {}
+interface IHeader {
+  callBackMenu: () => void;
+  refHeaderMenu: React.LegacyRef<HTMLDivElement>;
+}

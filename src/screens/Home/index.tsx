@@ -4,9 +4,11 @@ import InputSearch from "@/components/InputSearch";
 import CustomTable from "@/components/CustomTable";
 import { BadgeText } from "@/components/CustomTable/Badges/ValueText";
 import { Patient } from "@/services/types";
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
+import { GlobalContext } from "@/contexts/GlobalContext";
 
 const Home: React.FC = ({}) => {
+  const { sizeScreen } = useContext(GlobalContext);
   const [patientData, setPatientData] = useState<Patient[]>([
     {
       id: 1,
@@ -271,55 +273,57 @@ const Home: React.FC = ({}) => {
   ]);
 
   const data = useMemo(() => {
-    return patientData.map((item, index) => ({
-      nome: <BadgeText name={item.name} />,
-      cpf: <BadgeText name={item.cpf} />,
-      plano: <BadgeText name={item.provider} />,
-      // time: <BadgeTime time={item.time} />,
-      // score: (
-      //   <BadgeScore
-      //     position={index}
-      //     score={item.score}
-      //     isTrophyActive={index < 3}
-      //   />
-      // ),
-    }));
-  }, [patientData]);
+    return patientData.map((item, index) => {
+      const itens = {
+        nome: <BadgeText name={item.name} />,
+        cpf: <BadgeText name={item.cpf} />,
+        plano: <BadgeText name={item.provider} />,
+        telefone: <BadgeText name={item.landline} />,
+      };
+      const { telefone, plano, ...rest } = itens;
+      return sizeScreen.width > 770 && sizeScreen.width < 1012
+        ? { ...rest, plano }
+        : sizeScreen.width > 640 && sizeScreen.width < 770
+        ? rest
+        : itens;
+    });
+  }, [patientData, sizeScreen.width]);
 
   return (
     <HomeWrapper>
-      <ContainerHeaderHome>
-        <HomeContentButtons>
-          <Button
-            style={{
-              borderColor: "#c9c9c9",
-              color: "#959595",
-              height: 45,
-              width: 180,
-              background: "none",
-            }}
-            buttonType="invert"
-            title="teste"
-          />
-          <Button
-            style={{ width: 180, height: 45 }}
-            title="Lista de Pacientes"
-          />
-          <Button
-            style={{
-              borderColor: "#c9c9c9",
-              color: "#959595",
-              width: 180,
-              height: 45,
-              background: "none",
-            }}
-            buttonType="invert"
-            title="teste"
-          />
-        </HomeContentButtons>
-        <InputSearch />
-      </ContainerHeaderHome>
-      <CustomTable data={data} />
+      {/* <ContainerHeaderHome> */}
+      {/* {sizeScreen.width <= 640 && (
+          <HomeContentButtons>
+            <Button
+              style={{
+                borderColor: "#c9c9c9",
+                color: "#959595",
+                height: 45,
+                width: 180,
+                background: "none",
+              }}
+              buttonType="invert"
+              title="teste"
+            />
+            <Button
+              style={{ width: 180, height: 45 }}
+              title="Lista de Pacientes"
+            />
+            <Button
+              style={{
+                borderColor: "#c9c9c9",
+                color: "#959595",
+                width: 180,
+                height: 45,
+                background: "none",
+              }}
+              buttonType="invert"
+              title="teste"
+            />
+          </HomeContentButtons>
+        )} */}
+      {/* </ContainerHeaderHome> */}
+      <CustomTable responsive={sizeScreen.width < 640} data={data} />
     </HomeWrapper>
   );
 };

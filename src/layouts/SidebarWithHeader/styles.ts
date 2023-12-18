@@ -10,11 +10,14 @@ export const SidebarWithHeaderWrapper = styled.div`
 
 export const ContainerChildren = styled.div`
   display: flex;
+  position: relative;
+  /* overflow: auto; */
+  height: 100vh;
 `;
 
-export const ContentChildren = styled.div`
-  width: 100%;
-  height: 100vh;
-  overflow: auto;
-  box-sizing: border-box;
-`;
+// export const ContentChildren = styled.div`
+//   width: 100%;
+//   height: 100vh;
+//   overflow: auto;
+//   box-sizing: border-box;
+// `;

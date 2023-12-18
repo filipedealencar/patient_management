@@ -1,4 +1,8 @@
-import { MediaFunction, ThemeInterface } from "@/types/ThemeTypes";
+import {
+  MediaFunction,
+  MediaFunctionOrientation,
+  ThemeInterface,
+} from "@/types/ThemeTypes";
 import { css } from "styled-components";
 import { Interpolation } from "styled-components/dist/types";
 
@@ -83,19 +87,47 @@ const typography = {
 
 type Size = keyof typeof breakpointsSizes;
 
-const media = (type: "min" | "max"): MediaFunction =>
+const media = (type: "min" | "max" | "orientation"): MediaFunction =>
   Object.keys(breakpointsSizes).reduce((acc: any, label) => {
-    acc[label] = (...args: Interpolation<object>[]) => css`
-      @media (${type}-width: ${breakpointsSizes[label as Size]}px) {
-        ${css`
-          ${args}
-        `};
-      }
-    `;
+    if (type === "orientation") {
+      acc[type] = (...args: Interpolation<object>[]) => css`
+        @media (orientation: landscape) {
+          ${css`
+            ${args}
+          `};
+        }
+      `;
+    } else {
+      acc[label as Size] = (...args: Interpolation<object>[]) => css`
+        @media (${type}-width: ${breakpointsSizes[label as Size]}px) {
+          ${css`
+            ${args}
+          `};
+        }
+      `;
+    }
     return acc;
   }, {} as MediaFunction);
+const mediaorientation = (
+  type: "landscape" | "portrait"
+): MediaFunctionOrientation => {
+  return (...args: Interpolation<object>[]) => css`
+    @media (orientation: ${type}) {
+      ${css`
+        ${args}
+      `};
+    }
+  `;
+};
 
-const mediaType = { min: media("min"), max: media("max") };
+const mediaType = {
+  min: media("min"),
+  max: media("max"),
+  orientation: {
+    landscape: mediaorientation("landscape"),
+    portrait: mediaorientation("portrait"),
+  },
+};
 
 const theme: ThemeInterface = {
   media: mediaType,

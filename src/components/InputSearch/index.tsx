@@ -6,11 +6,11 @@ import {
   ButtonLoupe,
 } from "./styles";
 
-const InputSearch: React.FC = ({}) => {
+const InputSearch: React.FC<IInputSearch> = ({ styles }) => {
   return (
-    <InputSearchWrapper>
-      <ContainerInputSearch className="teste">
-        <InputSearchStyle placeholder="teste" />
+    <InputSearchWrapper style={styles?.wrapper}>
+      <ContainerInputSearch style={styles?.container}>
+        <InputSearchStyle style={styles?.input} placeholder="Buscar" />
         <ButtonLoupe>
           <IconLoupe />
         </ButtonLoupe>

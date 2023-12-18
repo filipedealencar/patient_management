@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
 html{
   width: 100vw;
     height: 100vh;
+    zoom: normal !important;
 
 }
 

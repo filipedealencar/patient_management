@@ -1,1 +1,4 @@
-interface ISidebar {}
+interface ISidebar {
+  isOpen: boolean;
+  refSideBar: React.LegacyRef<HTMLDivElement>;
+}
