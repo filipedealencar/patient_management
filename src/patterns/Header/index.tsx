@@ -31,6 +31,7 @@ const Header: React.FC<IHeader> = ({ callBackMenu, refHeaderMenu }) => {
   return (
     <>
       <HeaderWrapper
+        id={"header-wrapper"}
         style={{
           display:
             screenSize === "tablet" && sizeScreen.width > sizeScreen.height

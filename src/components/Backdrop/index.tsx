@@ -6,5 +6,5 @@ interface BackdropProps {
 }
 
 export const Backdrop: React.FC<BackdropProps> = ({ isOpen }) => {
-  return <BackdropContainer isOpen={isOpen} />;
+  return <BackdropContainer $isOpen={isOpen} />;
 };

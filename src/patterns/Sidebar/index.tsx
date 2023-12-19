@@ -71,11 +71,17 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen, refSideBar }) => {
           </ContentMobile>
         )}
         <ButtonSidebar>
-          <ContentIcon $isActive={pathname === "/"}>
+          <ContentIcon
+            onClick={() => router.push("/")}
+            $isActive={pathname === "/"}
+          >
             <IconList />
             <TextIcon $isActive={pathname === "/"}>Lista</TextIcon>
           </ContentIcon>
-          <ContentIcon $isActive={pathname === "/overview"}>
+          <ContentIcon
+            onClick={() => router.push("/overview")}
+            $isActive={pathname === "/overview"}
+          >
             <IconOverview />
             <TextIcon $isActive={pathname === "/overview"}>
               Visão Geral

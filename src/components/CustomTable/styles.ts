@@ -67,6 +67,12 @@ export const TRStyle = styled.tr`
   display: flex;
   flex-direction: column;
   `}
+
+  &:hover {
+    td > span {
+      background: #dbdbdb;
+    }
+  }
 `;
 export const THStyle = styled.th`
   padding: 10px;
@@ -103,18 +109,20 @@ export const THStyle = styled.th`
   `}
 `;
 export const TDStyle = styled.td`
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  background: #fff;
   height: 80px;
 
   &:first-child {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    span {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
   }
 
   &:last-child {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    span {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
   }
 
   ${({ theme }) => theme.media.max.mobileXL`

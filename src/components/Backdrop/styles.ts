@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface BackdropProps {
-  isOpen: boolean;
+  $isOpen: boolean;
   transitionDuration?: number;
 }
 
@@ -9,8 +9,8 @@ export const BackdropContainer = styled.div<BackdropProps>`
   position: fixed;
   inset: 0;
 
-  opacity: ${({ isOpen }) => (isOpen ? "1" : "0")};
-  visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
+  opacity: ${({ $isOpen }) => ($isOpen ? "1" : "0")};
+  visibility: ${({ $isOpen }) => ($isOpen ? "visible" : "hidden")};
 
   transition: all
     ${({ transitionDuration }) =>

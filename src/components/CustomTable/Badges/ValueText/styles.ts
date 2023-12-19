@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const ContainerBadgeText = styled.span`
-  padding: 8px;
   color: #757575;
   height: 100%;
   display: flex;
@@ -9,4 +8,8 @@ export const ContainerBadgeText = styled.span`
   align-items: center;
   font-weight: 600;
   font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  width: 100%;
 `;

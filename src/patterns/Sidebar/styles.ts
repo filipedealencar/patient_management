@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SidebarWrapper = styled.div<{ $isOpen: boolean }>`
-  padding: 20px;
+  padding: 20px 0 0 20px;
   height: 100vh;
   background-color: #0144dd;
   box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.1);
@@ -31,6 +31,9 @@ export const ContentIcon = styled.div<{ $isActive: boolean }>`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  padding: 20px;
+  background: ${({ $isActive }) => ($isActive ? "#f4f7fc" : "#0144dd")};
+  border-radius: 20px 0 0 20px;
 
   &:hover {
     filter: brightness(0.8);
@@ -41,17 +44,18 @@ export const ContentIcon = styled.div<{ $isActive: boolean }>`
     height: 30px;
 
     path {
-      fill: ${({ $isActive }) => ($isActive ? "#fff" : "#b3b3b3")};
+      fill: ${({ $isActive }) => ($isActive ? "#0144dd" : "#fff")};
     }
   }
 `;
 
 export const TextIcon = styled.span<{ $isActive: boolean }>`
-  color: ${({ $isActive }) => ($isActive ? "#fff" : "#b3b3b3")};
+  color: ${({ $isActive }) => ($isActive ? "#0144dd" : "#fff")};
   font-size: 12px;
   font-family: Montserrat;
   font-weight: 400;
   text-align: center;
+  white-space: nowrap;
 `;
 
 export const ContentMobile = styled.div`
