@@ -7,6 +7,7 @@ export const HeaderWrapper = styled.div`
   ${({ theme }) => theme.media.max.mobileXL`  
  padding: 10px;
  z-index: 9999;
+ border-bottom: 4px solid #0144dd;
    `}
   position: relative;
 `;
@@ -31,32 +32,4 @@ export const ContentMenu = styled.div`
   &:hover {
     filter: brightness(0.8);
   }
-`;
-export const ContentSearch = styled.div`
-  /* padding: 20px; */
-  position: absolute;
-  left: 80%;
-  cursor: pointer;
-`;
-
-export const ContentIconLoupe = styled.div`
-  padding: 20px;
-`;
-
-export const OpenSearchMobile = styled.div<{
-  $isOpen: boolean;
-  $customWidth: number;
-}>`
-  position: absolute;
-  z-index: 999;
-  width: ${({ $customWidth }) => $customWidth}px;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  text-align: center;
-
-  top: ${({ $isOpen }) => ($isOpen ? "100px" : "-100px")};
-
-  transition: all 0.5s ease-out 0s;
 `;

@@ -16,7 +16,7 @@ import {
   IconOverview,
 } from "@/icons";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import { GlobalContext } from "@/contexts/GlobalContext";
 import useScreenSize from "@/hooks/useScreenSize";
 import { Backdrop } from "@/components/Backdrop";
@@ -32,6 +32,27 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen, refSideBar }) => {
 
   const refContainerButtonSearch = useRef<HTMLDivElement>(null);
   const refSearchButtonMobile = useRef<HTMLDivElement>(null);
+  const refContentMobile = useRef<HTMLDivElement>(null);
+
+  const [customSizes, setCustomSizes] = useState({
+    contentMobile: {
+      height: refContentMobile?.current?.getBoundingClientRect().height ?? 0,
+      width: 0,
+    },
+  });
+
+  useEffect(() => {
+    setCustomSizes((state) => {
+      return {
+        ...state,
+        contentMobile: {
+          ...state.contentMobile,
+          height:
+            refContentMobile?.current?.getBoundingClientRect().height ?? 0,
+        },
+      };
+    });
+  }, [sizeScreen.width, sizeScreen.height, refContentMobile, screenSize]);
 
   useOutsideClick({
     ref: refSearchButtonMobile ?? null,
@@ -45,7 +66,7 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen, refSideBar }) => {
     <>
       <SidebarWrapper ref={refSideBar} $isOpen={isOpen}>
         {screenSize === "tablet" && sizeScreen.width > sizeScreen.height && (
-          <ContentMobile>
+          <ContentMobile ref={refContentMobile}>
             <IconLogotipo />
             <ContentIconLoupeSidebar>
               <div
@@ -70,7 +91,11 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen, refSideBar }) => {
             </ContentIconLoupeSidebar>
           </ContentMobile>
         )}
-        <ButtonSidebar>
+        <ButtonSidebar
+          $customHeight={
+            sizeScreen.height - customSizes.contentMobile.height - 20
+          }
+        >
           <ContentIcon
             onClick={() => router.push("/")}
             $isActive={pathname === "/"}

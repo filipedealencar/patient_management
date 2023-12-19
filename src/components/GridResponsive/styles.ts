@@ -20,6 +20,6 @@ export const ContainerGridResponsive = styled.div<IContainerGridResponsiveStyle>
       : `repeat(${$rows.count}, 1fr)`)};
   grid-column-gap: ${({ $spaceColumns }) => $spaceColumns}px;
   grid-row-gap: ${({ $spaceRows }) => $spaceRows}px;
-  width: ${({ $width }) => $width}px;
-  height: ${({ $height }) => $height}px;
+  width: ${({ $width }) => $width && `${$width}px`};
+  height: ${({ $height }) => $height && `${$height}px`};
 `;

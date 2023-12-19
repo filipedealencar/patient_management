@@ -7,7 +7,7 @@ export const SidebarWrapper = styled.div<{ $isOpen: boolean }>`
   box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.1);
   min-width: 100px;
 
-  z-index: 9999;
+  z-index: 99;
   /* transform: translateX(${({ $isOpen }) => ($isOpen ? 100 : 0)}%); */
   right: 100%;
   transition: transform 0.5s ease-out 0s;
@@ -18,11 +18,13 @@ export const SidebarWrapper = styled.div<{ $isOpen: boolean }>`
    `}
 `;
 
-export const ButtonSidebar = styled.div`
+export const ButtonSidebar = styled.div<{ $customHeight?: number }>`
   display: flex;
   flex-direction: column;
   gap: 32px;
   width: 100%;
+  height: ${({ $customHeight }) => $customHeight}px;
+  overflow: ${({ $customHeight }) => $customHeight && "auto"};
 `;
 
 export const ContentIcon = styled.div<{ $isActive: boolean }>`

@@ -7,17 +7,8 @@ export const WrapperOverview = styled.div<{ $customHeight: number }>`
   padding: 20px;
   position: relative;
   height: ${({ $customHeight }) => $customHeight}px;
-  gap: 24px;
-  ${({ theme }) => theme.media.max.mobileXL`
+  gap: 4px;
   overflow: auto;
-  `}
-`;
-
-export const ContainerSearch = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  position: relative;
 `;
 
 export const ContainerIcons = styled.div`
@@ -36,28 +27,16 @@ export const ContainerIcons = styled.div`
   `}
 `;
 
-export const ContainerResultSearch = styled.div`
-  width: 50%;
-  height: 200px;
-  background: #fff;
-  position: absolute;
-  top: 50px;
-  z-index: 99;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-  overflow: auto;
+export const ContainerButtonsAction = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-left: 10px;
 `;
 
-export const ContentResultSearch = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  background: #f7f7f7;
-  color: #737373;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-
-  &:hover {
-    background: #ebebeb;
-  }
+export const ModalSimpleText = styled.p`
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 150%;
+  color: #000;
 `;

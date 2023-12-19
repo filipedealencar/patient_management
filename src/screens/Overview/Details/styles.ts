@@ -33,7 +33,7 @@ export const ContainerProfile = styled.div`
 
 export const AvatarContainer = styled.div`
   width: 50px;
-  border-radius: 50%;
+  border-radius: 20%;
   overflow: hidden;
   border: 2px solid #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -61,8 +61,8 @@ export const ContentDetailsContact = styled.div`
   align-items: center;
   gap: 8px;
   svg {
-    width: 15px;
-    height: 30px;
+    width: 25px;
+    height: 35px;
   }
 `;
 
@@ -70,4 +70,16 @@ export const TextInfoDetails = styled.span`
   color: #272626;
   font-weight: 500;
   font-family: Montserrat;
+`;
+
+export const ContentResumeInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+`;
+
+export const TextDescritionResume = styled.span`
+  font-family: Montserrat;
+  color: #417bff;
+  font-weight: 500;
 `;
