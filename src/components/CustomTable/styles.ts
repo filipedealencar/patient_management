@@ -51,7 +51,7 @@ export const TableStyle = styled.table`
 export const TheadStyle = styled.thead`
   position: sticky;
   top: 0;
-  z-index: 99;
+  z-index: 90;
   height: 55px;
 
   ${({ theme }) => theme.media.orientation.landscape`

@@ -30,70 +30,53 @@ const CustomTable: React.FC<ICustomTable> = ({ data, responsive }) => {
       data,
     });
 
-  const TableResponsive = ({}) => {
+  const TableResponsive: React.FC<{ dataResponsive: any[] }> = ({
+    dataResponsive,
+  }) => {
+    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+      useTable({
+        columns,
+        data: dataResponsive,
+      });
     return (
-      <TableWrapper>
-        <ContainerTable>
+      <TableStyle {...getTableProps()}>
+        <TheadStyle>
           {React.Children.toArray(
-            data.map((item, i) => {
-              const {
-                getTableProps,
-                getTableBodyProps,
-                headerGroups,
-                rows,
-                prepareRow,
-              } = useTable({ columns, data: [item] });
-
+            headerGroups.map((headerGroup, index) => (
+              <TRStyle
+                {...headerGroup.getHeaderGroupProps()}
+                key={headerGroup.id}
+              >
+                {React.Children.toArray(
+                  headerGroup.headers.map((column) => (
+                    <THStyle {...column.getHeaderProps()} key={column.id}>
+                      {column.render("Header")}
+                    </THStyle>
+                  ))
+                )}
+              </TRStyle>
+            ))
+          )}
+        </TheadStyle>
+        <TbodyStyle {...getTableBodyProps()}>
+          {React.Children.toArray(
+            rows.map((row, index) => {
+              prepareRow(row);
               return (
-                <TableStyle {...getTableProps()}>
-                  <TheadStyle>
-                    {React.Children.toArray(
-                      headerGroups.map((headerGroup, index) => (
-                        <TRStyle
-                          {...headerGroup.getHeaderGroupProps()}
-                          key={headerGroup.id}
-                        >
-                          {React.Children.toArray(
-                            headerGroup.headers.map((column) => (
-                              <THStyle
-                                {...column.getHeaderProps()}
-                                key={column.id}
-                              >
-                                {column.render("Header")}
-                              </THStyle>
-                            ))
-                          )}
-                        </TRStyle>
-                      ))
-                    )}
-                  </TheadStyle>
-                  <TbodyStyle {...getTableBodyProps()}>
-                    {React.Children.toArray(
-                      rows.map((row, index) => {
-                        prepareRow(row);
-                        return (
-                          <TRStyle {...row.getRowProps()} key={row.id}>
-                            {row.cells.map((cell) => {
-                              return (
-                                <TDStyle
-                                  {...cell.getCellProps()}
-                                  key={cell.column.id}
-                                >
-                                  {cell.render("Cell")}
-                                </TDStyle>
-                              );
-                            })}
-                          </TRStyle>
-                        );
-                      })
-                    )}
-                  </TbodyStyle>
-                </TableStyle>
+                <TRStyle {...row.getRowProps()} key={row.id}>
+                  {row.cells.map((cell) => {
+                    return (
+                      <TDStyle {...cell.getCellProps()} key={cell.column.id}>
+                        {cell.render("Cell")}
+                      </TDStyle>
+                    );
+                  })}
+                </TRStyle>
               );
             })
           )}
-        </ContainerTable>
-      </TableWrapper>
+        </TbodyStyle>
+      </TableStyle>
     );
   };
 
@@ -145,7 +128,17 @@ const CustomTable: React.FC<ICustomTable> = ({ data, responsive }) => {
     );
   };
 
-  return responsive ? <TableResponsive /> : <TableDefault />;
+  return responsive ? (
+    <TableWrapper>
+      <ContainerTable>
+        {React.Children.toArray(
+          data.map((item) => <TableResponsive dataResponsive={[item]} />)
+        )}
+      </ContainerTable>
+    </TableWrapper>
+  ) : (
+    <TableDefault />
+  );
 };
 
 export default CustomTable;

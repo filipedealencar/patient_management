@@ -72,6 +72,7 @@ const Overview: React.FC<IOverView> = ({}) => {
     widthWrapperOverview,
     heightHeader,
     heightSearchOverview,
+    heightWrapperOverview,
   ]);
 
   return (

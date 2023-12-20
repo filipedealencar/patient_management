@@ -112,7 +112,10 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen, refSideBar }) => {
               Visão Geral
             </TextIcon>
           </ContentIcon>
-          <ContentIcon $isActive={pathname === "/register"}>
+          <ContentIcon
+            onClick={() => router.push("/register")}
+            $isActive={pathname === "/register"}
+          >
             <IconAdd />
             <TextIcon $isActive={pathname === "/register"}>Cadastrar</TextIcon>
           </ContentIcon>

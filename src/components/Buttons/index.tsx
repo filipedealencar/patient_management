@@ -26,10 +26,10 @@ export const Button: React.FC<ButtonProps> = ({
     </>
   ) : (
     <ButtonStyles
-      buttonType={buttonType}
+      $buttonType={buttonType}
       type="button"
       disabled={loading}
-      isBlueSencondary={isBlueSencondary}
+      $isBlueSencondary={isBlueSencondary}
       {...rest}
     >
       {title}

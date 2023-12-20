@@ -459,25 +459,25 @@ export const IconAlert: React.FC = ({}) => {
       <path
         d="M9.99967 10.9333V7.81665"
         stroke="#E71C35"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       ></path>
       <path
         d="M9.99884 13.4376C9.88384 13.4376 9.79051 13.5309 9.79134 13.6459C9.79134 13.7609 9.88468 13.8542 9.99968 13.8542C10.1147 13.8542 10.208 13.7609 10.208 13.6459C10.208 13.5309 10.1147 13.4376 9.99884 13.4376"
         stroke="#E71C35"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       ></path>
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M11.691 3.44916L18.0735 14.6192C18.8151 15.9175 17.8776 17.5333 16.3826 17.5333H3.61763C2.12179 17.5333 1.18429 15.9175 1.92679 14.6192L8.30929 3.44916C9.05679 2.13999 10.9435 2.13999 11.691 3.44916Z"
         stroke="#E71C35"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       ></path>
     </svg>
   );
