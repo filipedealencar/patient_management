@@ -9,6 +9,8 @@ export const FormTemplate: React.FC<IFormTemplate> = ({
   options,
   isModal,
   actionDismiss,
+  currentValues,
+  actionSubmit,
   refFormTemplate,
 }) => {
   const [modalOpen, setModalOpen] = useState(isModal);
@@ -23,7 +25,12 @@ export const FormTemplate: React.FC<IFormTemplate> = ({
         $isModal={modalOpen}
         $customHeight={height}
       >
-        <CustomForm actionDismiss={actionDismiss} options={options} />
+        <CustomForm
+          currentValues={currentValues}
+          actionSubmit={actionSubmit}
+          actionDismiss={actionDismiss}
+          options={options}
+        />
       </WrapperFormTemplate>
       {modalOpen && <Backdrop isOpen={modalOpen} />}
     </>

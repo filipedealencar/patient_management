@@ -43,7 +43,6 @@ const CustomModal: React.FC<ModalProps> = ({
 
   useEffect(() => {
     setModalOpen(isOpen);
-    console.log(isOpen);
   }, [isOpen]);
 
   const handleClose = () => {

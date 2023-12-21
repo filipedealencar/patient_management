@@ -50,8 +50,6 @@ export const Search: React.FC = ({}) => {
     setPatienByName(data);
   }, [data]);
 
-  console.log(patientByName);
-
   return (
     <>
       <ContentSearch>

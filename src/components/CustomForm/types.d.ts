@@ -20,6 +20,8 @@ import {
 } from "react-hook-form";
 
 interface ICustomForm {
+  actionSubmit?: (data: any) => void;
+  currentValues?: any;
   actionDismiss?: () => void;
   options: {
     titleSection: string;

@@ -1,32 +1,62 @@
-import { Button } from "@/components/Buttons";
-import { ContainerHeaderHome, HomeContentButtons, HomeWrapper } from "./styles";
-import InputSearch from "@/components/InputSearch";
+import { HomeWrapper } from "./styles";
 import CustomTable from "@/components/CustomTable";
 import { BadgeText } from "@/components/CustomTable/Badges/ValueText";
 import { PatientData } from "@/services/types";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { GlobalContext } from "@/contexts/GlobalContext";
-import PatientApi from "@/services/api/patient";
+import PatientApi, { getPatientById } from "@/services/api/patient";
+import { useRouter } from "next/router";
 
 const Home: React.FC = ({}) => {
-  const { sizeScreen } = useContext(GlobalContext);
-  const [patientData, setPatientData] = useState<PatientData[]>([]);
+  const { sizeScreen, setCurrentPatient, currentPatient } =
+    useContext(GlobalContext);
+  const [patientsData, setPatientsData] = useState<PatientData[]>([]);
+  const router = useRouter();
 
   const patient = new PatientApi();
 
-  const { data } = patient.getAllPatients();
+  const { data: patients } = patient.getAllPatients();
 
   useEffect(() => {
-    setPatientData(data ?? []);
-  }, [data]);
+    setPatientsData(patients || []);
+  }, [patients]);
+
+  const getPatientAndNavigate = (id: number) => {
+    getPatientById(id).then((res) => {
+      setCurrentPatient(res);
+      setTimeout(() => {
+        router.push("/overview");
+      }, 100);
+    });
+  };
 
   const dataPatient = useMemo(() => {
-    return patientData.map((item, index) => {
+    return patientsData.map((item, index) => {
       const itens = {
-        nome: <BadgeText name={item.name} />,
-        cpf: <BadgeText name={item.cpf} />,
-        plano: <BadgeText name={item.plan} />,
-        telefone: <BadgeText name={item.phone} />,
+        nome: (
+          <BadgeText
+            callBack={() => getPatientAndNavigate(item.id!)}
+            name={item.name}
+          />
+        ),
+        cpf: (
+          <BadgeText
+            callBack={() => getPatientAndNavigate(item.id!)}
+            name={item.cpf}
+          />
+        ),
+        plano: (
+          <BadgeText
+            callBack={() => getPatientAndNavigate(item.id!)}
+            name={item.plan}
+          />
+        ),
+        telefone: (
+          <BadgeText
+            callBack={() => getPatientAndNavigate(item.id!)}
+            name={item.phone}
+          />
+        ),
       };
       const { telefone, plano, ...rest } = itens;
       return sizeScreen.width > 770 && sizeScreen.width < 1012
@@ -35,7 +65,7 @@ const Home: React.FC = ({}) => {
         ? rest
         : itens;
     });
-  }, [patientData, sizeScreen.width]);
+  }, [patientsData, sizeScreen.width]);
 
   return (
     <HomeWrapper>

@@ -41,8 +41,6 @@ const SidebarWithHeader: React.FC<ISidebarWithHeader> = ({ children }) => {
     },
   });
 
-  console.log(sizeChildrenContainer);
-
   return (
     <SidebarWithHeaderWrapper>
       <Header

@@ -25,7 +25,7 @@ import { useRouter } from "next/router";
 
 const Sidebar: React.FC<ISidebar> = ({ isOpen, refSideBar }) => {
   const [isOpenSearchButton, setIsOpenSearchButton] = useState(false);
-  const { sizeScreen } = useContext(GlobalContext);
+  const { sizeScreen, setCurrentPatient } = useContext(GlobalContext);
   const router = useRouter();
   const pathname = router.pathname;
   const screenSize = useScreenSize();
@@ -97,7 +97,10 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen, refSideBar }) => {
           }
         >
           <ContentIcon
-            onClick={() => router.push("/")}
+            onClick={() => {
+              router.push("/");
+              setCurrentPatient(undefined);
+            }}
             $isActive={pathname === "/"}
           >
             <IconList />

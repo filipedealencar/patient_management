@@ -22,6 +22,8 @@ import {
 interface IFormTemplate {
   refFormTemplate?: LegacyRef<HTMLDivElement> | undefined;
   actionDismiss?: () => void;
+  currentValues?: currentValues;
+  actionSubmit?: (data: any) => void;
   isModal: boolean;
   height: number;
   options: {

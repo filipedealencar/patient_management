@@ -7,6 +7,7 @@ import { NextPage } from "next";
 import "@/styles/fonts.css";
 import { GlobalContextProvider } from "@/contexts/GlobalContext";
 import SidebarWithHeader from "@/layouts/SidebarWithHeader";
+import { Toaster } from "react-hot-toast";
 
 export type NextPageWithLayout<P = unknown, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -39,6 +40,7 @@ const App: React.FC<AppProps> = ({
   return (
     mounted && (
       <GlobalContextProvider>
+        <Toaster position="top-right" reverseOrder={false} />
         <ThemeWrapper />
       </GlobalContextProvider>
     )

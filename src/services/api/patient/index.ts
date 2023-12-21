@@ -104,16 +104,84 @@ export default class PatientApi {
       error,
     };
   };
+}
 
-  deletePatient = (id: number): IHttpResponse<void, unknown> => {
-    const { data, error } = SWRHttpClient.useDelete<void>(
-      this.deletePatientEndpoint(id)
-    ) as IHttpResponse<void, unknown>;
+export async function getPatientById(id: number): Promise<PatientData> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_APIS_BASE_URL}/patients/${id}`
+    );
 
-    return {
-      data,
-      isLoading: !error && !data,
-      error,
-    };
-  };
+    if (!response.ok) {
+      throw new Error(`Erro na requisição GET: ${response.statusText}`);
+    }
+
+    const data: PatientData = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function deletePatientById(id: number): Promise<void> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_APIS_BASE_URL}/patients/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Erro na requisição DELETE: ${response.statusText}`);
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+export async function insertPatient(body: any): Promise<void> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_APIS_BASE_URL}/patients`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Erro na requisição DELETE: ${response.statusText}`);
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+export async function updatePatient(
+  id: number,
+  updatedData: any
+): Promise<void> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_APIS_BASE_URL}/patients/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Erro na requisição PUT: ${response.statusText}`);
+    }
+  } catch (error) {
+    throw error;
+  }
 }

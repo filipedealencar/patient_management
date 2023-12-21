@@ -11,20 +11,30 @@ import {
 } from "./styles";
 import GridResponsive from "../GridResponsive";
 import { ICustomForm } from "./types";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "../Buttons";
 
 export const CustomForm: React.FC<ICustomForm> = ({
   options,
+  currentValues,
   actionDismiss,
+  actionSubmit,
 }) => {
   const {
     register,
     handleSubmit,
-    watch,
+    setValue,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => actionSubmit && actionSubmit(data);
+
+  useEffect(() => {
+    options.map((section) => {
+      section.inputs.map((inputs) => {
+        return setValue(inputs.name, inputs.value);
+      });
+    });
+  }, [currentValues]);
 
   return (
     <WrapperCustomForm onSubmit={handleSubmit(onSubmit)}>
@@ -49,8 +59,10 @@ export const CustomForm: React.FC<ICustomForm> = ({
                   <ContainerInput>
                     <InputStyle
                       {...itens}
+                      value={itens.value || ""}
                       {...register(`${itens.name}`, {
                         required: itens.required,
+                        onChange: itens.onChange,
                       })}
                     />
                   </ContainerInput>

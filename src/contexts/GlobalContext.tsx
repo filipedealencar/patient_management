@@ -15,8 +15,8 @@ interface GlobalContextData {
     SetStateAction<{ width: number; height: number }>
   >;
   sizeChildrenContainer: { width: number; height: number };
-  setCurrentPatient: Dispatch<SetStateAction<PatientData>>;
-  currentPatient: PatientData;
+  setCurrentPatient: Dispatch<SetStateAction<PatientData | undefined | null>>;
+  currentPatient: PatientData | undefined | null;
   setDarkMode: Dispatch<SetStateAction<boolean>>;
   darkMode: boolean;
 }
@@ -43,24 +43,9 @@ export const GlobalContextProvider = ({ children }: GlobalProps) => {
     height: 0,
   });
 
-  const [currentPatient, setCurrentPatient] = useState<PatientData>({
-    birthDate: "",
-    cell: "",
-    cpf: "",
-    diseases: "",
-    email: "",
-    fatherName: "",
-    gender: "",
-    lastAppointment: "",
-    motherName: "",
-    name: "",
-    nextAppointment: "",
-    phone: "",
-    plan: "",
-    professional: "",
-    rg: "",
-    specialty: "",
-  });
+  const [currentPatient, setCurrentPatient] = useState<
+    PatientData | undefined | null
+  >(undefined);
 
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
