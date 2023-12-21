@@ -40,7 +40,7 @@ export const Search: React.FC = ({}) => {
         ref={refSearchButtonMobile}
         $isOpen={isOpenSearchButton}
       >
-        <ContainerSearch id="container-search-overview">
+        <ContainerSearch>
           <InputSearch
             styles={{
               wrapper: {

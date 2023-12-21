@@ -26,16 +26,7 @@ const App: React.FC<AppProps> = ({
   }, []);
 
   const ThemeWrapper = () => {
-    return Component.getLayout ? (
-      Component.getLayout(
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <SidebarWithHeader>
-            <Component {...pageProps} />
-          </SidebarWithHeader>
-        </ThemeProvider>
-      )
-    ) : (
+    return (
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <SidebarWithHeader>

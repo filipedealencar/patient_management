@@ -14,7 +14,10 @@ import { ICustomForm } from "./types";
 import React from "react";
 import { Button } from "../Buttons";
 
-export const CustomForm: React.FC<ICustomForm> = ({ options }) => {
+export const CustomForm: React.FC<ICustomForm> = ({
+  options,
+  actionDismiss,
+}) => {
   const {
     register,
     handleSubmit,
@@ -65,6 +68,7 @@ export const CustomForm: React.FC<ICustomForm> = ({ options }) => {
           type="submit"
         />
         <Button
+          onClick={actionDismiss}
           style={{ width: "130px", height: "40px", backgroundColor: "#fd3737" }}
           title="Cancelar"
         />

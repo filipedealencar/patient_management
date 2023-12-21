@@ -1,15 +1,15 @@
-import { CustomForm } from "@/components/CustomForm";
 import { WrapperRegister } from "./styles";
 import { FormTemplate } from "@/layouts/FormTemplate";
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "@/contexts/GlobalContext";
+import { CustomForm } from "@/components/CustomForm";
 
 const Register: React.FC = ({}) => {
   const heightHeader = document
     .getElementById("header-wrapper")
     ?.getBoundingClientRect().height;
 
-  const { sizeScreen } = useContext(GlobalContext);
+  const { sizeScreen, sizeChildrenContainer } = useContext(GlobalContext);
   const [customSizes, setCustomSizes] = useState({
     header: heightHeader ?? 0,
   });
@@ -20,9 +20,10 @@ const Register: React.FC = ({}) => {
     });
   }, [sizeScreen.width, sizeScreen.height, heightHeader]);
   return (
-    <WrapperRegister>
-      <FormTemplate
-        height={sizeScreen.height - 80 - customSizes.header}
+    <WrapperRegister $customHeight={sizeChildrenContainer.height - 50}>
+      <CustomForm
+        // isModal={false}
+        // height={sizeScreen.height - 80 - customSizes.header}
         options={[
           {
             titleSection: "Informações de Contato",

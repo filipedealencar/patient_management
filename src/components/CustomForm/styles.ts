@@ -5,6 +5,9 @@ export const WrapperCustomForm = styled.form`
   justify-content: center;
   flex-direction: column;
   gap: 38px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 20px;
 `;
 
 export const MainInputForm = styled.div`

@@ -20,6 +20,7 @@ import {
 } from "react-hook-form";
 
 interface ICustomForm {
+  actionDismiss?: () => void;
   options: {
     titleSection: string;
     inputs: inputValue[];

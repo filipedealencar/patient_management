@@ -20,6 +20,9 @@ import {
 } from "react-hook-form";
 
 interface IFormTemplate {
+  refFormTemplate?: LegacyRef<HTMLDivElement> | undefined;
+  actionDismiss?: () => void;
+  isModal: boolean;
   height: number;
   options: {
     titleSection: string;

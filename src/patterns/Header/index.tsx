@@ -8,14 +8,18 @@ import { useOutsideClick } from "@/hooks/useOutsideClick";
 import useScreenSize from "@/hooks/useScreenSize";
 import { Search } from "@/layouts/Search";
 
-const Header: React.FC<IHeader> = ({ callBackMenu, refHeaderMenu }) => {
+const Header: React.FC<IHeader> = ({
+  callBackMenu,
+  refHeaderMenu,
+  refMenuButtonHeader,
+}) => {
   const { sizeScreen } = useContext(GlobalContext);
   const [isOpenSearchButton, setIsOpenSearchButton] = useState(false);
   const screenSize = useScreenSize();
 
   return (
     <HeaderWrapper
-      id={"header-wrapper"}
+      ref={refHeaderMenu}
       style={{
         display:
           screenSize === "tablet" && sizeScreen.width > sizeScreen.height
@@ -25,7 +29,7 @@ const Header: React.FC<IHeader> = ({ callBackMenu, refHeaderMenu }) => {
     >
       <ContainerHeader>
         {sizeScreen.width < 640 && (
-          <ContentMenu ref={refHeaderMenu} onClick={callBackMenu}>
+          <ContentMenu ref={refMenuButtonHeader} onClick={callBackMenu}>
             <IconHamburger />
           </ContentMenu>
         )}

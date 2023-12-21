@@ -1,4 +1,4 @@
-import { ReactNode, useRef, useState } from "react";
+import { LegacyRef, ReactNode, useEffect, useRef, useState } from "react";
 import {
   ModalOverlay,
   ModalContainer,
@@ -14,11 +14,11 @@ import {
   ContainerChildren,
 } from "./styles";
 import { Backdrop } from "../Backdrop";
-import { useOutsideClick } from "@/hooks/useOutsideClick";
 import { IconClose } from "@/icons";
 
 interface ModalProps {
   isOpen: boolean;
+  refCustomModal?: LegacyRef<HTMLDivElement> | undefined;
   onClose?: () => void;
   onAction?: () => void;
   children: ReactNode;
@@ -30,6 +30,7 @@ interface ModalProps {
 
 const CustomModal: React.FC<ModalProps> = ({
   isOpen,
+  refCustomModal,
   onClose,
   onAction,
   textOnAction,
@@ -40,7 +41,10 @@ const CustomModal: React.FC<ModalProps> = ({
 }) => {
   const [modalOpen, setModalOpen] = useState(isOpen);
 
-  const refModal = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    setModalOpen(isOpen);
+    console.log(isOpen);
+  }, [isOpen]);
 
   const handleClose = () => {
     setModalOpen(false);
@@ -51,18 +55,10 @@ const CustomModal: React.FC<ModalProps> = ({
     onAction && onAction();
   };
 
-  useOutsideClick({
-    ref: refModal,
-    callback() {
-      setModalOpen(false);
-      console.log(modalOpen);
-    },
-  });
-
   return (
     modalOpen && (
       <>
-        <ModalOverlay ref={refModal} $isOpen={modalOpen}>
+        <ModalOverlay ref={refCustomModal} $isOpen={modalOpen}>
           <ModalContainer>
             <HeaderModal>
               <ContainerTitleModal>
