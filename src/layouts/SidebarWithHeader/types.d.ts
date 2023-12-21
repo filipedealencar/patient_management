@@ -1,3 +1,3 @@
-interface ISidebar {
+interface ISidebarWithHeader {
   children: React.ReactNode;
 }

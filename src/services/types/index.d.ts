@@ -1,0 +1,20 @@
+export type PatientData = {
+  id?: number;
+  adress?: string;
+  name: string;
+  phone: string;
+  cell: string;
+  email: string;
+  gender: string;
+  birthDate: string;
+  cpf: string;
+  rg: string;
+  motherName: string;
+  fatherName: string;
+  lastAppointment: string;
+  nextAppointment: string;
+  professional: string;
+  plan: string;
+  specialty: string;
+  diseases: string;
+};
