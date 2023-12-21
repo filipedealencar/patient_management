@@ -1,3 +1,4 @@
+import { PatientData } from "@/services/types";
 import React, {
   createContext,
   Dispatch,
@@ -14,6 +15,8 @@ interface GlobalContextData {
     SetStateAction<{ width: number; height: number }>
   >;
   sizeChildrenContainer: { width: number; height: number };
+  setCurrentPatient: Dispatch<SetStateAction<PatientData>>;
+  currentPatient: PatientData;
   setDarkMode: Dispatch<SetStateAction<boolean>>;
   darkMode: boolean;
 }
@@ -40,6 +43,25 @@ export const GlobalContextProvider = ({ children }: GlobalProps) => {
     height: 0,
   });
 
+  const [currentPatient, setCurrentPatient] = useState<PatientData>({
+    birthDate: "",
+    cell: "",
+    cpf: "",
+    diseases: "",
+    email: "",
+    fatherName: "",
+    gender: "",
+    lastAppointment: "",
+    motherName: "",
+    name: "",
+    nextAppointment: "",
+    phone: "",
+    plan: "",
+    professional: "",
+    rg: "",
+    specialty: "",
+  });
+
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
   useEffect(() => {
@@ -62,6 +84,8 @@ export const GlobalContextProvider = ({ children }: GlobalProps) => {
   return (
     <GlobalContext.Provider
       value={{
+        setCurrentPatient,
+        currentPatient,
         setSizeChildrenContainer,
         sizeChildrenContainer,
         setSizeScreen,

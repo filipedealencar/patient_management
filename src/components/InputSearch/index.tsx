@@ -6,11 +6,21 @@ import {
   ButtonLoupe,
 } from "./styles";
 
-const InputSearch: React.FC<IInputSearch> = ({ styles, id }) => {
+const InputSearch: React.FC<IInputSearch> = ({
+  styles,
+  id,
+  onChange,
+  value,
+}) => {
   return (
     <InputSearchWrapper id={id} style={styles?.wrapper}>
       <ContainerInputSearch style={styles?.container}>
-        <InputSearchStyle style={styles?.input} placeholder="Buscar" />
+        <InputSearchStyle
+          value={value}
+          onChange={onChange}
+          style={styles?.input}
+          placeholder="Buscar"
+        />
         <ButtonLoupe>
           <IconLoupe />
         </ButtonLoupe>

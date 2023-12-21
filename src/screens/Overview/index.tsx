@@ -1,9 +1,10 @@
 import {
   ContainerButtonsAction,
+  ContainerIcons,
   ModalSimpleText,
   WrapperOverview,
 } from "./styles";
-import { IconAlert } from "@/icons";
+import { IconAlert, IconSearchNotFound, IconSearchTerm } from "@/icons";
 import { GlobalContext } from "@/contexts/GlobalContext";
 import { useContext, useEffect, useRef, useState } from "react";
 import DetailsOverview from "./Details";
@@ -13,7 +14,8 @@ import { FormTemplate } from "@/layouts/FormTemplate";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
 
 const Overview: React.FC<IOverView> = ({}) => {
-  const { sizeScreen, sizeChildrenContainer } = useContext(GlobalContext);
+  const { sizeScreen, sizeChildrenContainer, currentPatient } =
+    useContext(GlobalContext);
   const [isOpenActionsModal, setIsOpenActionModal] = useState({
     update: false,
     delete: false,
@@ -64,59 +66,66 @@ const Overview: React.FC<IOverView> = ({}) => {
     };
   }, [sizeScreen, refHeader]);
 
+  console.log(currentPatient);
+
   return (
     <>
       <WrapperOverview $customHeight={sizeChildrenContainer.height - 72}>
-        <ContainerButtonsAction>
-          <Button
-            title={"Atualizar dados"}
-            onClick={() =>
-              setIsOpenActionModal((state) => {
-                return { ...state, update: true };
-              })
-            }
-          />
-          <Button
-            onClick={() =>
-              setIsOpenActionModal((state) => {
-                return { ...state, delete: true };
-              })
-            }
-            style={{ backgroundColor: "#fd3737" }}
-            title={"Excluir dados"}
-          />
-        </ContainerButtonsAction>
-        <DetailsOverview
-          options={{
-            name: "Oliver Hugo Joaquim Gonçalves",
-            detailsContact: {
-              phone: "99999999999",
-              cellPhone: "99999999999",
-              email: "oliver.hugo.goncalves@recnev.com.br".replace("@", " @"),
-              adress: "Rua Cipotânia",
-            },
-            resumeDetails: {
-              gender: "Masculino",
-              dateOfBirth: "27/11/1990",
-              cpf: "940.297.724-47",
-              rg: "20.893.581-2",
-              motherName: "Maya Juliana Lara",
-              fatherName: "Paulo Kauê Lorenzo Gonçalves",
-            },
-            medicalDetails: {
-              lastAppointment: "22/10/2023",
-              nextAppointment: "22/01/2024",
-              professional: "João Calebe",
-              specialty: "Cardiologia",
-              healthPlan: "Central Nacional Unimed",
-              diseases: ["Rinite", "Bronquite", "Enxaqueca"].join(" / "),
-            },
-          }}
-        />
-        {/* <ContainerIcons>
-    <IconSearchTerm />
-    <IconSearchNotFound />
-  </ContainerIcons> */}
+        {currentPatient.name === (undefined || "") ? (
+          <ContainerIcons>
+            <IconSearchTerm />
+            {/* <IconSearchNotFound /> */}
+          </ContainerIcons>
+        ) : (
+          <>
+            <ContainerButtonsAction>
+              <Button
+                title={"Atualizar dados"}
+                onClick={() =>
+                  setIsOpenActionModal((state) => {
+                    return { ...state, update: true };
+                  })
+                }
+              />
+              <Button
+                onClick={() =>
+                  setIsOpenActionModal((state) => {
+                    return { ...state, delete: true };
+                  })
+                }
+                style={{ backgroundColor: "#fd3737" }}
+                title={"Excluir dados"}
+              />
+            </ContainerButtonsAction>
+            <DetailsOverview
+              options={{
+                name: currentPatient.name ?? "",
+                detailsContact: {
+                  phone: currentPatient.phone ?? "",
+                  cellPhone: currentPatient.cell ?? "",
+                  email: (currentPatient.email ?? "").replace("@", " @"),
+                  adress: currentPatient.adress ?? "",
+                },
+                resumeDetails: {
+                  gender: currentPatient.gender,
+                  dateOfBirth: currentPatient.birthDate,
+                  cpf: currentPatient.cpf ?? "",
+                  rg: currentPatient.rg ?? "",
+                  motherName: currentPatient.motherName ?? "",
+                  fatherName: currentPatient.fatherName ?? "",
+                },
+                medicalDetails: {
+                  lastAppointment: currentPatient.lastAppointment ?? "",
+                  nextAppointment: currentPatient.nextAppointment ?? "",
+                  professional: currentPatient.professional ?? "",
+                  specialty: currentPatient.specialty ?? "",
+                  healthPlan: currentPatient.plan ?? "",
+                  diseases: currentPatient.diseases ?? "",
+                },
+              }}
+            />
+          </>
+        )}
 
         <CustomModal
           titleModal="Remover paciente?"

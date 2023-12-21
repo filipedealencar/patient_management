@@ -9,7 +9,7 @@ export const ContainerSearch = styled.div`
 
 export const ContainerResultSearch = styled.div`
   width: 50%;
-  height: 200px;
+  max-height: 200px;
   background: #fff;
   position: absolute;
   top: 50px;

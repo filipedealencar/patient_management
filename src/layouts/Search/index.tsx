@@ -1,22 +1,35 @@
 import InputSearch from "@/components/InputSearch";
 import {
   ContainerSearch,
-  ContainerResultSearch,
-  ContentResultSearch,
   OpenSearchMobile,
   ContentSearch,
   ContentIconLoupe,
+  ContainerResultSearch,
+  ContentResultSearch,
 } from "./styles";
 import { GlobalContext } from "@/contexts/GlobalContext";
-import { useContext, useRef, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
 import { Backdrop } from "@/components/Backdrop";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
-import { IconButtonSearch, IconLoupe } from "@/icons";
+import { IconButtonSearch } from "@/icons";
+import PatientApi from "@/services/api/patient";
+import { useDebounce } from "@/hooks/useDebounce";
+import { PatientData } from "@/services/types";
+import React from "react";
+import { useRouter } from "next/router";
 
 export const Search: React.FC = ({}) => {
-  const { sizeScreen } = useContext(GlobalContext);
+  const { sizeScreen, setCurrentPatient } = useContext(GlobalContext);
   const [isOpenSearchButton, setIsOpenSearchButton] = useState(false);
   const refSearchButtonMobile = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const [inputValue, setInputValue] = useState("");
+  const debouncedValue = useDebounce(inputValue, 500);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!isOpenSearchButton) return;
+    setInputValue(event.target.value);
+  };
 
   useOutsideClick({
     ref: refSearchButtonMobile ?? null,
@@ -24,6 +37,21 @@ export const Search: React.FC = ({}) => {
       setIsOpenSearchButton(false);
     },
   });
+
+  const [patientByName, setPatienByName] = useState<
+    PatientData[] | null | undefined
+  >();
+
+  const patient = new PatientApi();
+
+  const { data } = patient.searchPatientsByName(debouncedValue);
+
+  useEffect(() => {
+    setPatienByName(data);
+  }, [data]);
+
+  console.log(patientByName);
+
   return (
     <>
       <ContentSearch>
@@ -40,33 +68,50 @@ export const Search: React.FC = ({}) => {
         ref={refSearchButtonMobile}
         $isOpen={isOpenSearchButton}
       >
-        <ContainerSearch>
-          <InputSearch
-            styles={{
-              wrapper: {
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-              },
-              container: {
+        {isOpenSearchButton && (
+          <ContainerSearch>
+            <InputSearch
+              value={inputValue}
+              onChange={handleChange}
+              styles={{
+                wrapper: {
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                },
+                container: {
+                  width:
+                    sizeScreen.width < 640
+                      ? `calc(${sizeScreen.width}px - 100px)`
+                      : "50%",
+                },
+              }}
+            />
+            <ContainerResultSearch
+              style={{
                 width:
                   sizeScreen.width < 640
                     ? `calc(${sizeScreen.width}px - 100px)`
                     : "50%",
-              },
-            }}
-          />
-          {/* <ContainerResultSearch
-            style={{
-              width:
-                sizeScreen.width < 640
-                  ? `calc(${sizeScreen.width}px - 100px)`
-                  : "50%",
-            }}
-          >
-            <ContentResultSearch>Teste</ContentResultSearch>
-          </ContainerResultSearch> */}
-        </ContainerSearch>
+              }}
+            >
+              {(Array.isArray(patientByName) ? patientByName : []).map(
+                (patient) => (
+                  <React.Fragment key={patient.id}>
+                    <ContentResultSearch
+                      onClick={() => {
+                        setCurrentPatient(patient);
+                        router.push("/overview");
+                      }}
+                    >
+                      {patient.name}
+                    </ContentResultSearch>
+                  </React.Fragment>
+                )
+              )}
+            </ContainerResultSearch>
+          </ContainerSearch>
+        )}
       </OpenSearchMobile>
 
       <Backdrop isOpen={isOpenSearchButton} />
