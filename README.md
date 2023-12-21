@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Patient Management (Front-end) - Luis Filipe J Alencar
 
-## Getting Started
+O Patient Management (Front-end) é a interface de usuário do sistema de gerenciamento de pacientes, proporcionando uma experiência intuitiva e amigável para visualização e interação com os dados dos pacientes. Este projeto foi desenvolvido utilizando Next.js com TypeScript, e inclui bibliotecas como SWR, Styled Components, React Loading Skeleton e React Hot Toast.
 
-First, run the development server:
+Este projeto foi criado para proporcionar uma experiência totalmente agradável e suave aos usuários, destacando-se pela sua responsividade e pela utilização de tecnologias modernas.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Desenvolvedor
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+O Patient Management foi 100% desenvolvido por Luis Filipe Joaquim de Alencar
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Funcionalidades
 
-## Learn More
+- **Visualize e interaja com os dados dos pacientes.**
+- **Insira novos pacientes.**
+- **Atualize informações de pacientes existentes.**
+- **Exclua pacientes do sistema.**
 
-To learn more about Next.js, take a look at the following resources:
+## Tecnologias Utilizadas
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **React e Next.js:** Frameworks JavaScript amplamente utilizados para construção de interfaces web modernas.
+- **TypeScript:** Adiciona tipagem estática ao JavaScript, trazendo benefícios de legibilidade e manutenibilidade ao código.
+- **SWR:** Biblioteca React que fornece uma abordagem eficiente para buscar, armazenar em cache e gerenciar o estado de dados remotos.
+- **Styled Components:** Estiliza componentes em aplicações React usando uma abordagem baseada em componentes e CSS-in-JS (CSS dentro do JavaScript). .
+- **React Loading Skeleton:** Adiciona esqueletos de carregamento para melhorar a experiência do usuário durante o carregamento de dados.
+- **React Hot Toast:** Biblioteca React que oferece uma solução simples e estilizada para exibir notificações (toasts) na interface do usuário.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Principais Destaques
 
-## Deploy on Vercel
+- **Interface intuitiva e fácil de usar.**
+- **Atualização dinâmica dos dados dos pacientes.**
+- **Experiência consistente e responsiva em diferentes dispositivos.**
+- **Utilização eficiente do SWR para gerenciamento de dados remotos**
+- **Estilização moderna e consistente com Styled Components.**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Como Executar o Projeto
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+To get started with the project, follow these steps:
+
+1. **Clone o repositório::**
+
+   ```bash
+   git clone https://github.com/filipedealencar/patient-management
+
+   ```
+
+2. **Entre no repositório do projeto**
+
+   ```bash
+   cd patient-management
+
+   ```
+
+3. **Instale as dependências:**
+
+   ```bash
+   yarn install
+
+   ```
+
+4. **Inicie a aplicação:**
+
+   ```bash
+   yarn dev
+   ```
+
+Agora você pode acessar o projeto em http://localhost:3000.
+
+## Contribuições
+
+Contribuições são bem-vindas! Se você encontrar problemas, bugs ou melhorias potenciais, sinta-se à vontade para abrir uma issue ou enviar um pull request.
+
+Obrigado por explorar o Patient Management! Esperamos que tenha uma experiência agradável.
